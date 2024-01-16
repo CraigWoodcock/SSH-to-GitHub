@@ -48,7 +48,7 @@ SSH is a more secure way of connecting to our resources and we use a GitBash ter
  ![SSH Github](<../SSH Screenshots/Screenshot 2024-01-08 151034.png>)
 
 8. Start the SSH Agent.
-   - ``eval `ssh-agent -s``
+   - `eval $(ssh-agent -s)`
 
 9. Add Key to SSH Register:
    - `ssh-add craig-github-ssh-key`
@@ -59,6 +59,33 @@ SSH is a more secure way of connecting to our resources and we use a GitBash ter
 
 11. Now we can create a test folder in the directory where our github files go and then create a file to push to github..
     - `mkdir test-ssh-repo`
-    - cd 
 
+12. cd into the repo and make a new file with a new line of text
+    - `echo this is a test line > testFile.txt`
+  
+13. now add, commit and push,
+    - `git remote add origin <url to repo>`
+    - `git add .`
+    - `git commit testFile.txt -m "message"`
+    - `git push origin main`
+
+14. when launching a new bash terminal, we need to re-add the key and start the agent:
+   - Start the SSH Agent.
+    - ``eval `ssh-agent -s``
+
+   - Add Key to SSH Register:
+    - `ssh-add craig-github-ssh-key`
+  
+15. To Make the Key persist, add it to the .bashrc file:<br>
+    - The following lines will start the agent and add the key each time the terminal is launched without printing confirmation to the terminal.
+```
+ # Start SSH agent in silent mode
+eval "$(ssh-agent -s)" > /dev/null 2>&1
+
+# Add SSH key silently
+ssh-add ~/.ssh/craig-github-ssh-key > /dev/null 2>&1
+
+```
+
+ 
 
